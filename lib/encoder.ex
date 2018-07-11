@@ -4,10 +4,10 @@ defmodule Logger.Formatter.Encoder do
   """
 
   # Raise compile error when no logger was configured. This avoid building
-  # production application without JSON encoder.
+  # production application without encoder.
   Application.fetch_env!(:logger, :encoder)
 
-  @doc "Formats a log message as a JSON encoded string."
+  @doc "Formats a log message as an encoded string."
   @spec format(
           Logger.level(),
           Logger.message(),
