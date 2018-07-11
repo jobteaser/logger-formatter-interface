@@ -8,10 +8,10 @@ end
 
 defmodule EncoderExpecter do
   def encode!(map) do
-    if map["ts"] != "2014-12-30 12:06:30.100", do: raise "ts not ok"
-    if map["msg"] != "hello world", do: raise "msg not ok"
-    if map["level"] != :error, do: raise "level not ok"
-    if map[:foo] == nil, do: raise "foo not ok"
+    if map["ts"] != "2014-12-30 12:06:30.100", do: raise("ts not ok")
+    if map["msg"] != "hello world", do: raise("msg not ok")
+    if map["level"] != :error, do: raise("level not ok")
+    if map[:foo] == nil, do: raise("foo not ok")
     ""
   end
 end
