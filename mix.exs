@@ -1,9 +1,9 @@
-defmodule Logger.Formatter.JSON.MixProject do
+defmodule Logger.Formatter.Encoder.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :json_logger,
+      app: :logger_encoder,
       version: "0.1.0",
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,

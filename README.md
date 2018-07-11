@@ -1,16 +1,14 @@
-# Logger.Formatter.JSON
+# Logger Formatter Encoder
 
-**TODO: Add description**
+This library provide a simple way to change the formatter of the Logger console
+backend.
 
 ## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `json_logger` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:json_logger, "~> 0.1.0"}
+    {:logger_encoder, "~> 0.1.0"}
   ]
 end
 ```

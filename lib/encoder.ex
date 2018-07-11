@@ -1,14 +1,11 @@
-defmodule Logger.Formatter.JSON do
+defmodule Logger.Formatter.Encoder do
   @moduledoc """
-  Documentation for Logger.Formatter.JSON.
-   + add application env in logger config
-   + compile time error without configuration
+  This module provide a simple interface to inject a custom logger formatter.
   """
 
   # Raise compile error when no logger was configured. This avoid building
   # production application without JSON encoder.
-  # TODO: fail condition only in use
-  Application.fetch_env!(:logger, :json_encoder)
+  Application.fetch_env!(:logger, :encoder)
 
   @doc "Formats a log message as a JSON encoded string."
   @spec format(
@@ -17,12 +14,10 @@ defmodule Logger.Formatter.JSON do
           Logger.Formatter.time(),
           keyword()
         ) :: IO.chardata()
-  # Avoid fail in the formatting function.
   def format(level, message, time, metadata) do
-    # This order avoid metadata overiding the default fields.
     Map.new(metadata)
     |> Map.merge(%{"msg" => message, "level" => level, "ts" => fmt_dt(time)})
-    |> Application.fetch_env!(:logger, :json_encoder).encode!()
+    |> Application.fetch_env!(:logger, :encoder).encode!()
   rescue
     _ ->
       """
