@@ -13,7 +13,9 @@ def deps do
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/json_logger](https://hexdocs.pm/json_logger).
+## How to use
 
+```
+config :logger,
+  encoder: Poison # to use Poison and encode your log with the JSON format
+```
