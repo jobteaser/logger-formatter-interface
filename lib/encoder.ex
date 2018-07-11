@@ -3,6 +3,8 @@ defmodule Logger.Formatter.Encoder do
   This module provide a simple interface to inject a custom logger formatter.
   """
 
+  @callback encode!(map()) :: IO.chardata()
+
   # Raise compile error when no logger was configured. This avoid building
   # production application without encoder.
   Application.fetch_env!(:logger, :encoder)
