@@ -3,7 +3,7 @@ defmodule Logger.Formatter.Encoder.MixProject do
 
   def project do
     [
-      app: :logger_encoder,
+      app: :logger_interface,
       version: "0.1.0",
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,

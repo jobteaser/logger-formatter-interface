@@ -1,14 +1,13 @@
-# Logger Formatter Encoder
+# Logger Formatter Interface
 
-This library provide a simple way to change the formatter of the Logger console
-backend.
+This library provides a way to change the output format of the Logger (json, xml, etc.).
 
 ## Installation
 
 ```elixir
 def deps do
   [
-    {:logger_encoder, "~> 0.1.0"}
+    {:logger_interface, "~> 0.1.0"}
   ]
 end
 ```
@@ -16,6 +15,7 @@ end
 ## How to use
 
 ```
-config :logger,
+config :logger, :console
+  format: {Logger.Formatter.Interface, :format},
   encoder: Poison # to use Poison and encode your log with the JSON format
 ```

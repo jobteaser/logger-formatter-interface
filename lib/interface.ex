@@ -1,4 +1,4 @@
-defmodule Logger.Formatter.Encoder do
+defmodule Logger.Formatter.Interface do
   @moduledoc """
   This module provide a simple interface to inject a custom logger formatter.
   """
@@ -7,7 +7,6 @@ defmodule Logger.Formatter.Encoder do
 
   # Raise compile error when no logger was configured. This avoid building
   # production application without encoder.
-  Application.fetch_env!(:logger, :encoder)
 
   @doc "Formats a log message as an encoded string."
   @spec format(

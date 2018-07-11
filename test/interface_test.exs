@@ -16,41 +16,41 @@ defmodule EncoderExpecter do
   end
 end
 
-defmodule Logger.Formatter.EncoderTest do
+defmodule Logger.Formatter.InterfaceTest do
   use ExUnit.Case
 
-  alias Logger.Formatter.Encoder
+  alias Logger.Formatter.Interface
 
   test "work" do
-    Application.put_env(:logger, :json_encoder, DummyEncoderSuccess)
+    Application.put_env(:logger, :encoder, DummyEncoderSuccess)
 
-    assert Encoder.format(nil, nil, nil, nil) ==
+    assert Interface.format(nil, nil, nil, nil) ==
              "{\"msg\": \"could not format: {nil, nil, nil, nil}\"}\n"
 
-    assert Encoder.format(:error, nil, nil, nil) ==
+    assert Interface.format(:error, nil, nil, nil) ==
              "{\"msg\": \"could not format: {:error, nil, nil, nil}\"}\n"
 
-    assert Encoder.format(:error, "hello world", nil, nil) ==
+    assert Interface.format(:error, "hello world", nil, nil) ==
              "{\"msg\": \"could not format: {:error, \"hello world\", nil, nil}\"}\n"
 
     ts = {{2014, 12, 30}, {12, 6, 30, 100}}
 
-    assert Encoder.format(:error, "hello world", ts, nil) ==
+    assert Interface.format(:error, "hello world", ts, nil) ==
              "{\"msg\": \"could not format: {:error, \"hello world\", #{inspect(ts)}, nil}\"}\n"
 
-    assert Encoder.format(:error, "hello world", ts, []) == ""
+    assert Interface.format(:error, "hello world", ts, []) == ""
 
-    assert Encoder.format(:error, "hello world", ts, foo: "bar") == ""
+    assert Interface.format(:error, "hello world", ts, foo: "bar") == ""
 
     Application.put_env(:logger, :encoder, DummyEncoderFail)
 
-    assert Encoder.format(:error, "hello world", ts, foo: "bar") ==
+    assert Interface.format(:error, "hello world", ts, foo: "bar") ==
              "{\"msg\": \"could not format: {:error, \"hello world\", {{2014, 12, 30}, {12, 6, 30, 100}}, [foo: \"bar\"]}\"}\n"
 
     Application.put_env(:logger, :encoder, EncoderExpecter)
 
-    assert Encoder.format(:error, "hello world", ts, foo: "bar") == ""
+    assert Interface.format(:error, "hello world", ts, foo: "bar") == ""
 
-    assert Encoder.format(:error, "hello world", ts, foo: "bar", ts: "foobar") == ""
+    assert Interface.format(:error, "hello world", ts, foo: "bar", ts: "foobar") == ""
   end
 end
