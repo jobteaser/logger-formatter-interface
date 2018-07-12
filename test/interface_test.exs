@@ -25,18 +25,18 @@ defmodule Logger.Formatter.InterfaceTest do
     Application.put_env(:logger, :encoder, DummyEncoderSuccess)
 
     assert Interface.format(nil, nil, nil, nil) ==
-             "{\"msg\": \"could not format: {nil, nil, nil, nil}\"}\n"
+             "{\"msg\": \"could not format: {nil, nil, nil, nil}\", \"error\": {%Protocol.UndefinedError{description: \"\", protocol: Enumerable, value: nil}}\"}\n"
 
     assert Interface.format(:error, nil, nil, nil) ==
-             "{\"msg\": \"could not format: {:error, nil, nil, nil}\"}\n"
+             "{\"msg\": \"could not format: {:error, nil, nil, nil}\", \"error\": {%Protocol.UndefinedError{description: \"\", protocol: Enumerable, value: nil}}\"}\n"
 
     assert Interface.format(:error, "hello world", nil, nil) ==
-             "{\"msg\": \"could not format: {:error, \"hello world\", nil, nil}\"}\n"
+             "{\"msg\": \"could not format: {:error, \"hello world\", nil, nil}\", \"error\": {%Protocol.UndefinedError{description: \"\", protocol: Enumerable, value: nil}}\"}\n"
 
     ts = {{2014, 12, 30}, {12, 6, 30, 100}}
 
     assert Interface.format(:error, "hello world", ts, nil) ==
-             "{\"msg\": \"could not format: {:error, \"hello world\", #{inspect(ts)}, nil}\"}\n"
+             "{\"msg\": \"could not format: {:error, \"hello world\", {{2014, 12, 30}, {12, 6, 30, 100}}, nil}\", \"error\": {%Protocol.UndefinedError{description: \"\", protocol: Enumerable, value: nil}}\"}\n"
 
     assert Interface.format(:error, "hello world", ts, []) == ""
 
@@ -45,7 +45,7 @@ defmodule Logger.Formatter.InterfaceTest do
     Application.put_env(:logger, :encoder, DummyEncoderFail)
 
     assert Interface.format(:error, "hello world", ts, foo: "bar") ==
-             "{\"msg\": \"could not format: {:error, \"hello world\", {{2014, 12, 30}, {12, 6, 30, 100}}, [foo: \"bar\"]}\"}\n"
+             "{\"msg\": \"could not format: {:error, \"hello world\", {{2014, 12, 30}, {12, 6, 30, 100}}, [foo: \"bar\"]}\", \"error\": {%RuntimeError{message: \"foo\"}}\"}\n"
 
     Application.put_env(:logger, :encoder, EncoderExpecter)
 

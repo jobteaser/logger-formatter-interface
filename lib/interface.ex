@@ -20,9 +20,11 @@ defmodule Logger.Formatter.Interface do
     |> Map.merge(%{"msg" => message, "level" => level, "ts" => fmt_dt(time)})
     |> Application.fetch_env!(:logger, :encoder).encode!()
   rescue
-    _ ->
+    error ->
       """
-      {"msg": "could not format: #{inspect({level, message, time, metadata})}"}
+      {"msg": "could not format: #{inspect({level, message, time, metadata})}", "error": #{
+        inspect({error})
+      }"}
       """
   end
 
