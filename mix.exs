@@ -30,7 +30,7 @@ defmodule Logger.Formatter.Encoder.MixProject do
       files: ["lib", "mix.exs", "README.md", "LICENSE"],
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/jobteaser/logger-formatter-interface"},
-      maintainers: ["Gearnode <friminb@gmail.com>", "Yann Very <yann.very@joteaser.com>"]
+      maintainers: ["Bryan Frimin <friminb@gmail.com>", "Yann Very <yann.very@joteaser.com>"]
     ]
   end
 end
