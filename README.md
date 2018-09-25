@@ -1,8 +1,6 @@
 # Logger Formatter Interface
 
-This library provides a way to change the output format of the Logger (json, binary, etc.).
-
-Painless k
+Simply the way to change the default formatter of the Elixir Logger module.
 
 ## Installation
 
