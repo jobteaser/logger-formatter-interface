@@ -6,22 +6,18 @@ defmodule Logger.Formatter.Encoder.MixProject do
       app: :logger_interface,
       version: "1.0.0",
       elixir: "~> 1.6",
-      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
       name: "Logger.Formatter.Encoder",
       description: "A simple logger interface for Elixir console backend",
       source_url: "https://github.com/jobteaser/logger-formatter-interface",
       homepage_url: "http://github.com/jobteaser/logger-formatter-interface",
-      deps: deps(),
+      deps: [],
       package: package()
     ]
   end
 
   def application do
     [extra_applications: [:logger]]
-  end
-
-  defp deps do
-    []
   end
 
   defp package do
