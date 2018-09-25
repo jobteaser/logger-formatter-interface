@@ -4,9 +4,8 @@ defmodule Logger.Formatter.Encoder.MixProject do
   def project do
     [
       app: :logger_interface,
-      version: "0.1.0",
+      version: "1.0.0",
       elixir: "~> 1.6",
-      start_permanent: Mix.env() == :prod,
       name: "Logger.Formatter.Encoder",
       description: "A simple logger interface for Elixir console backend",
       source_url: "https://github.com/jobteaser/logger-formatter-interface",
