@@ -8,7 +8,7 @@ defmodule Logger.Formatter.Encoder.MixProject do
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
       name: "Logger.Formatter.Encoder",
-      description: "A simple logger interface for Elixir console backend"
+      description: "A simple logger interface for Elixir console backend",
       source_url: "https://github.com/jobteaser/logger-formatter-interface",
       homepage_url: "http://github.com/jobteaser/logger-formatter-interface",
       deps: deps(),
