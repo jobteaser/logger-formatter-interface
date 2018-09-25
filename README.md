@@ -16,7 +16,7 @@ end
 
 ## Usage
 
-```
+```elixir
 config :logger, :console
   format: {Logger.Formatter.Interface, :format},
   encoder: Poison # E.g. use Poison and encode your log with the JSON format
