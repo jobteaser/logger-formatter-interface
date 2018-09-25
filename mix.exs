@@ -1,9 +1,9 @@
-defmodule Logger.Formatter.Encoder.MixProject do
+defmodule Logger.Formatter.Interface.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :logger_interface,
+      app: :logger_formatter_interface,
       version: "1.0.0",
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
