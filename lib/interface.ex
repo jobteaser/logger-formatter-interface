@@ -5,9 +5,6 @@ defmodule Logger.Formatter.Interface do
 
   @callback encode!(map()) :: IO.chardata()
 
-  # Raise compile error when no logger was configured. This avoid building
-  # production application without encoder.
-
   @doc "Formats a log message as an encoded string."
   @spec format(
           Logger.level(),
