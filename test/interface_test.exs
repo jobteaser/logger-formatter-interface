@@ -52,5 +52,7 @@ defmodule Logger.Formatter.InterfaceTest do
     assert Interface.format(:error, "hello world", ts, foo: "bar") == ""
 
     assert Interface.format(:error, "hello world", ts, foo: "bar", ts: "foobar") == ""
+
+    assert Interface.format(:error, ["hello", 32, ["world"]], ts, foo: "bar") == ""
   end
 end
