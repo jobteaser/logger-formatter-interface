@@ -14,7 +14,7 @@ defmodule Logger.Formatter.Interface do
         ) :: IO.chardata()
   def format(level, message, time, metadata) do
     Map.new(metadata)
-    |> Map.merge(%{"msg" => message, "level" => level, "ts" => fmt_dt(time)})
+    |> Map.merge(%{"msg" => clean_message(message), "level" => level, "ts" => fmt_dt(time)})
     |> Application.fetch_env!(:logger, :encoder).encode!()
   rescue
     error ->
@@ -24,6 +24,16 @@ defmodule Logger.Formatter.Interface do
       }"}
       """
   end
+
+  defp clean_message(message) when is_list(message) do
+    message
+    |> List.flatten()
+    |> Enum.filter(&is_binary/1)
+    |> Enum.reduce("", fn x, acc -> "#{acc} #{x}" end)
+    |> String.trim()
+  end
+
+  defp clean_message(message), do: message
 
   defp fmt_dt({date, time}) do
     "#{Logger.Formatter.format_date(date)} #{Logger.Formatter.format_time(time)}"
