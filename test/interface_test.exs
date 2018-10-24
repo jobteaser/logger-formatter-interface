@@ -10,7 +10,7 @@ defmodule EncoderExpecter do
   def encode!(map) do
     if map["ts"] != "2014-12-30 12:06:30.100", do: raise("ts not ok")
 
-    if map["msg"] != "hello world", do: raise("msg not ok")
+    if map["message"] != "hello world", do: raise("message not ok")
     if map["level"] != :error, do: raise("level not ok")
     if map[:foo] == nil, do: raise("foo not ok")
     ""
@@ -18,7 +18,7 @@ defmodule EncoderExpecter do
 end
 
 defmodule PipeEncoder do
-  def encode!(map), do: map["msg"]
+  def encode!(map), do: map["message"]
 end
 
 defmodule Logger.Formatter.InterfaceTest do
@@ -30,16 +30,16 @@ defmodule Logger.Formatter.InterfaceTest do
     Application.put_env(:logger, :encoder, DummyEncoderSuccess)
 
     assert Interface.format(nil, nil, nil, nil) ==
-             "{\"msg\": \"could not format: {nil, nil, nil, nil}\", \"error\": {%Protocol.UndefinedError{description: \"\", protocol: Enumerable, value: nil}}\"}\n"
+             "{\"message\": \"could not format: {nil, nil, nil, nil}\", \"error\": {%Protocol.UndefinedError{description: \"\", protocol: Enumerable, value: nil}}\"}\n"
 
     assert Interface.format(:error, nil, nil, nil) ==
-             "{\"msg\": \"could not format: {:error, nil, nil, nil}\", \"error\": {%Protocol.UndefinedError{description: \"\", protocol: Enumerable, value: nil}}\"}\n"
+             "{\"message\": \"could not format: {:error, nil, nil, nil}\", \"error\": {%Protocol.UndefinedError{description: \"\", protocol: Enumerable, value: nil}}\"}\n"
 
     assert Interface.format(:error, "hello world", nil, nil) ==
-             "{\"msg\": \"could not format: {:error, \"hello world\", nil, nil}\", \"error\": {%Protocol.UndefinedError{description: \"\", protocol: Enumerable, value: nil}}\"}\n"
+             "{\"message\": \"could not format: {:error, \"hello world\", nil, nil}\", \"error\": {%Protocol.UndefinedError{description: \"\", protocol: Enumerable, value: nil}}\"}\n"
 
     assert Interface.format(:error, "hello world", {{2014, 12, 30}, {12, 6, 30, 100}}, nil) ==
-             "{\"msg\": \"could not format: {:error, \"hello world\", {{2014, 12, 30}, {12, 6, 30, 100}}, nil}\", \"error\": {%Protocol.UndefinedError{description: \"\", protocol: Enumerable, value: nil}}\"}\n"
+             "{\"message\": \"could not format: {:error, \"hello world\", {{2014, 12, 30}, {12, 6, 30, 100}}, nil}\", \"error\": {%Protocol.UndefinedError{description: \"\", protocol: Enumerable, value: nil}}\"}\n"
   end
 
   test "log record with all requirements" do
@@ -54,7 +54,7 @@ defmodule Logger.Formatter.InterfaceTest do
     Application.put_env(:logger, :encoder, DummyEncoderFail)
 
     assert Interface.format(:error, "hello world", {{2014, 12, 30}, {12, 6, 30, 100}}, foo: "bar") ==
-             "{\"msg\": \"could not format: {:error, \"hello world\", {{2014, 12, 30}, {12, 6, 30, 100}}, [foo: \"bar\"]}\", \"error\": {%RuntimeError{message: \"foo\"}}\"}\n"
+             "{\"message\": \"could not format: {:error, \"hello world\", {{2014, 12, 30}, {12, 6, 30, 100}}, [foo: \"bar\"]}\", \"error\": {%RuntimeError{message: \"foo\"}}\"}\n"
   end
 
   test "formatter output" do
