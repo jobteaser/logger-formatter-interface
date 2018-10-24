@@ -15,7 +15,7 @@ defmodule Logger.Formatter.Interface do
   def format(level, message, time, metadata) do
     Map.new(metadata)
     |> Map.merge(%{
-      "msg" => :erlang.iolist_to_binary(message),
+      "message" => :erlang.iolist_to_binary(message),
       "level" => level,
       "ts" => fmt_dt(time)
     })
@@ -23,7 +23,7 @@ defmodule Logger.Formatter.Interface do
   rescue
     error ->
       """
-      {"msg": "could not format: #{inspect({level, message, time, metadata})}", "error": #{
+      {"message": "could not format: #{inspect({level, message, time, metadata})}", "error": #{
         inspect({error})
       }"}
       """
