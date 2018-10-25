@@ -7,7 +7,7 @@ Simply the way to change the default formatter of the Elixir Logger module.
 ```elixir
 def deps do
   [
-    {:logger_interface, "~> 1.0.2"}
+    {:logger_interface, "~> 1.0.3"}
   ]
 end
 ```
